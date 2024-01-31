@@ -9,8 +9,9 @@ import {Container} from "react-bootstrap";
 function App() {
     return (
         <>
+          <div className="app-container">
             <NavBar/>
-            <Container>
+            <Container className="container-app">
                 <Routes>
                     <Route path="/" element={<Chat/>}/>
                     <Route path="/register" element={<Register/>}/>
@@ -18,6 +19,7 @@ function App() {
                     <Route path="*" element={<Navigate to="/"/>}/>
                 </Routes>
             </Container>
+            </div>
         </>
     );
 }
