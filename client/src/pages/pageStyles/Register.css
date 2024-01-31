@@ -29,12 +29,8 @@
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 40px;
     font-size: 16px;
-    color: #ffff;
+    color: #ffffff;
     padding: 20px 45px 20px 20px;
-}
-
-.input-box input::placeholder{
-    color: #ffff;
 }
 
 .input-box .icon{
@@ -45,53 +41,18 @@
     font-size: 16px;
 }
 
-.wrapper .remeber-forgot{
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    margin: -15px 0 15px;
+/* CSS-Datei */
+.button-box .register-button {
+    background-color: rgba(201, 42, 199, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, .2);
 }
 
-.remeber-forgot label input{
-    accent-color: #ffff;
-    margin-right: 10px;
+.button-box .register-button:hover {
+    background-color: rgba(250, 0, 245, 0.71);
+    border: 0px solid rgba(255, 255, 255, 0);
 }
 
-.remeber-forgot a{
-    color: #ffff;
-    text-decoration: none;
-}
 
-.remeber-forgot a:hover{
-    text-decoration: underline;
-}
 
-.wrapper button{
-    width: 100%;
-    height: 45px;
-    background: #ffff;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: 16px;
-    coler: #333;
-    font-weight: 700;
-}
 
-.wrapper .register-link{
-    font-size: 14.5px;
-    text-align: center;
-    margin: 20px;
-}
-
-.register-link p a{
-    color: #ffff;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.register-link p a:hover{
-    text-decoration: underline;
-}
