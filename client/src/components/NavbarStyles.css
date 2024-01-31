@@ -1,0 +1,18 @@
+.navbar-custom {
+    height: 3.75rem;
+    width: 100% !important;
+}
+
+.navbar-title {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-logged-in-user {
+    color: #ffc107; /* gelblich */
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+}
