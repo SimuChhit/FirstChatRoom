@@ -1,5 +1,6 @@
 import {createContext, useCallback, useState} from 'react';
-import {postRequest} from "../utils/services.js";
+import {baseUrl, postRequest} from "../utils/services.js";
+
 
 export const AuthContext = createContext();
 
@@ -25,7 +26,9 @@ export const AuthContextProvider = ({children}) => {
     setIsRegisterLoading(true);
     setRegisterError(null);
 
-    const response = await postRequest('${baseUrl}/users/register', JSON.stringify(registerInfo));
+    const response = await postRequest(
+      `${baseUrl}/users/register`,
+      JSON.stringify(registerInfo));
 
     setIsRegisterLoading(false);
 
