@@ -34,7 +34,7 @@ const Register = () => {
           <Button className="register-button" variant="primary" type="submit">
             {isRegisterLoading ? "Creating your account" : "Register"}
           </Button>
-          {registerError?.error && <Alert variant="danger"><p>{registerError?.message}</p></Alert>}
+          {registerError?.error && <Alert variant="danger" className="errorMessage"><p>{registerError?.message}</p></Alert>}
         </div>
       </div>
     </Form>
