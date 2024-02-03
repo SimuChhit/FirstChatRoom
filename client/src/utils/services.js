@@ -4,10 +4,10 @@ export const postRequest = async (url, body) =>{
   const response = await fetch(url, {
     method: "POST",
     headers:{
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body
-  })
+    body,
+  });
 
   const data = await response.json();
 
