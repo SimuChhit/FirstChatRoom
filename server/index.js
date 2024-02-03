@@ -5,6 +5,7 @@ const mongoose = require("mongoose"); // Mongoose für MongoDB Interaktionen
 
 // Importieren des Benutzer-Routers aus einer externen Datei
 const userRouter = require("./Routes/userRoute");
+const chatRouter = require("./Routes/chatRoute");
 
 // Nicht verwendete MongoDB-Client-Importe (können entfernt werden, falls nicht benötigt)
 const {MongoClient, ServerApiVersion} = require('mongodb');
@@ -18,6 +19,7 @@ require("dotenv").config();
 app.use(express.json()); // Erlaubt das Parsen von JSON-Daten in Anfragen
 app.use(cors()); // Aktiviert CORS, damit der Server Anfragen von anderen Domänen akzeptieren kann
 app.use("/api/users", userRouter); // Leitet Anfragen an /api/users an den userRouter weiter
+app.use("/api/chats", chatRouter); // Leitet Anfragen an /api/chats an den chatRouter weiter
 
 // Grundlegender Route-Handler für die Startseite
 app.get("/", (req, res) => {
