@@ -6,6 +6,7 @@ const mongoose = require("mongoose"); // Mongoose für MongoDB Interaktionen
 // Importieren des Benutzer-Routers aus einer externen Datei
 const userRouter = require("./Routes/userRoute");
 const chatRouter = require("./Routes/chatRoute");
+const messageRoute = require("./Routes/messageRoute");
 
 // Nicht verwendete MongoDB-Client-Importe (können entfernt werden, falls nicht benötigt)
 const {MongoClient, ServerApiVersion} = require('mongodb');
@@ -20,10 +21,11 @@ app.use(express.json()); // Erlaubt das Parsen von JSON-Daten in Anfragen
 app.use(cors()); // Aktiviert CORS, damit der Server Anfragen von anderen Domänen akzeptieren kann
 app.use("/api/users", userRouter); // Leitet Anfragen an /api/users an den userRouter weiter
 app.use("/api/chats", chatRouter); // Leitet Anfragen an /api/chats an den chatRouter weiter
+app.use("/api/messages", messageRoute); // Leitet Anfragen an /api/messages an den messageRouter weiter
 
 // Grundlegender Route-Handler für die Startseite
 app.get("/", (req, res) => {
-    res.send("Welcome to our Chat app");
+  res.send("Welcome to our Chat app");
 });
 
 // Definieren des Ports, auf dem der Server läuft
@@ -33,13 +35,13 @@ const uri = process.env.ATLAS_URI;
 
 // Starten des Express-Servers
 app.listen(port, (req, res) => {
-    console.log(`Server is running on port: ${port}`)
+  console.log(`Server is running on port: ${port}`)
 });
 
 // Verbindung zur MongoDB-Datenbank herstellen
 mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
-    .then(() => console.log("MongoDB connected")).catch(err => console.log
+  .then(() => console.log("MongoDB connected")).catch(err => console.log
 ("MongoDB connection failed: ", err.message))

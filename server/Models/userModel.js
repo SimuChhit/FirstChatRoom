@@ -8,10 +8,10 @@ const userSchema = new mongoose.Schema({
     name: {type: String, require: true, minlegth: 3, maxlength: 30},
     email: {type: String, require: true, minlegth: 3, maxlength: 200, unique: true},
     password: {type: String, require: true, minlegth: 3, maxlength: 1024}
-},
-{
+  },
+  {
     timestamps: true
-}
+  }
 );
 // Erstellen eines Modells basierend auf dem Schema
 // Ein Modell stellt eine Sammlung in der MongoDB dar und wird verwendet, um Daten zu erstellen, abzurufen, zu aktualisieren und zu löschen.
