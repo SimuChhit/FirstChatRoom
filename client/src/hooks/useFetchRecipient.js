@@ -9,7 +9,7 @@ export const useFetchRecipientUser = (chat, user) => {
     useEffect(() => {
         const getUser = async () => {
             if (!recipientId) return null
-            const response = await getRequest(`${baseUrlq}/users/find/${recipientId}`)
+            const response = await getRequest(`${baseUrl}/users/find/${recipientId}`)
 
             if (response.error) {
                 setError(response.error)

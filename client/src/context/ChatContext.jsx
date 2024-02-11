@@ -1,10 +1,10 @@
-import {createContext, useState, useEffect} from "react";
+import {createContext, useState, useEffect, useCallback} from "react";
 import {baseUrl, getRequest, postRequest} from "../utils/services.js";
 
 export const ChatContext = createContext();
 
 export const ChatContextProvider = ({children, user}) => {
-  const [userChats, setUserChats] = useState([null]);
+  const [userChats, setUserChats] = useState([]);
   const [isUserChatsLoading, setIsUserChatsLoading] = useState(false);
   const [userChatError, setUserChatsError] = useState(null);
   const [potentialChats, setPotentialChats] = useState([]);
@@ -77,7 +77,7 @@ export const ChatContextProvider = ({children, user}) => {
       value={{
         userChats,
         isUserChatsLoading,
-        userChatsError,
+        userChatError,
         potentialChats,
         createChat,
       }}

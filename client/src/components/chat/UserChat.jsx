@@ -1,5 +1,8 @@
+import React from 'react'; // Stelle sicher, dass React importiert wird, falls du JSX verwendest.
+import { Stack } from 'react-bootstrap'; // Importiere Stack von react-bootstrap
 import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
-import avatar from "../../assets/Avatar_female.svg"
+import avatar from "../../assets/Avatar_female.svg";
+
 const UserChats = ({ chat, user }) => {
     const { recipientUser } = useFetchRecipientUser(chat, user)
 
@@ -22,7 +25,7 @@ const UserChats = ({ chat, user }) => {
         <div className="d-flex flex-column align-items-end">
         <div className="date">09/02/2024</div>
         <div className="this-user-notifications">2</div>
-        <span className={user-Online? "user-online" : ""}></span>
+        <span className= "user-online"></span>
         </div>
     </Stack>
     );
