@@ -1,9 +1,10 @@
-import {createContext, useState, useEffect, useCallback} from "react";
-import {baseUrl, getRequest, postRequest} from "../utils/services.js";
+import { createContext, useState, useEffect, useCallback } from "react";
+import { baseUrl, getRequest, postRequest } from "../utils/services.js";
+import { io } from "socket.io-client";
 
 export const ChatContext = createContext();
 
-export const ChatContextProvider = ({children, user}) => {
+export const ChatContextProvider = ({ children, user }) => {
   const [userChats, setUserChats] = useState([]);
   const [isUserChatsLoading, setIsUserChatsLoading] = useState(false);
   const [userChatError, setUserChatsError] = useState(null);
@@ -12,8 +13,61 @@ export const ChatContextProvider = ({children, user}) => {
   const [messages, setMessages] = useState(null);
   const [messagesError, setMessagesError] = useState(null);
   const [isMessagesLoading, setIsMessagesLoading] = useState(false)
+  const [sendTextMessageError, setSendTextMessageError] = useState(null);
+  const [newMessage, setNewMessage] = useState(null);
+  const [socket, SetSocket] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
-console.log("messages", messages);
+  console.log("messages", messages);
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:3000");
+    SetSocket(newSocket);
+
+    return () => {
+      newSocket.disconnect();
+    }
+  }, [user]);
+
+useEffect(() => {
+  if (socket === null) return;
+  socket.emit("addNewUser", user?._id);
+  socket.on("getOnlineUsers", (res) => {
+    setOnlineUsers(res);
+  });
+
+  return () => {
+    socket.off("getOnlineUsers");
+  };
+}, [socket]);
+
+//send message
+useEffect(() => {
+  if (socket === null) return;
+
+  const recipientId = currentChat?.members?.find((id) => id !== user?._id);
+
+  socket.emit("sendMessage", {...newMessage, recipientId})
+
+
+}, [newMessage]);
+
+//recieve messages
+useEffect(() => {
+  if (socket === null) return;
+
+socket.on("getMessage", res => {
+  if (res.chatId === currentChat?._id) return
+  setMessages((prev) => [...prev, res]);
+});
+
+  return () => {
+    socket.off("getMessage");
+  }
+
+
+}, [socket, currentChat]);
+
 
   useEffect(() => {
     const getUsers = async () => {
@@ -65,25 +119,53 @@ console.log("messages", messages);
   useEffect(() => {
     const getMessage = async () => {
 
-        setIsMessagesLoading(true);
-        setMessagesError(null);
+      setIsMessagesLoading(true);
+      setMessagesError(null);
 
-        const response = await getRequest(`${baseUrl}/messages/${currentChat?._id}`);
+      const response = await getRequest(`${baseUrl}/messages/${currentChat?._id}`);
 
-        setIsMessagesLoading(false);
+      setIsMessagesLoading(false);
 
-        if (response.error) {
-          return setMessagesError(response);
-        }
+      if (response.error) {
+        return setMessagesError(response);
+      }
 
-        setMessages(response);
-      
+      setMessages(response);
+
     };
 
     getMessage();
   }, [currentChat]);
 
-const updateCurrentChat = useCallback((chat) => {
+
+  const sendTextMessage = useCallback(
+    async (textMessage, sender,currentChatId, setTextMessage) => {
+      if (!textMessage) return console.log("No message to send...");
+
+      const response = await postRequest(
+        `${baseUrl}/messages`,
+        JSON.stringify({
+          chatId: currentChatId,
+          senderId: sender._id,
+          text: textMessage,
+        })
+      );
+
+      if (response.error) {
+        return setSendTextMessageError(response);
+      }
+setNewMessage(response)
+      setMessages((prev) => [...prev, response]);
+      setTextMessage("");
+    },
+    []
+  );
+
+
+
+
+
+  const updateCurrentChat = useCallback((chat) => {
     setCurrentChat(chat);
   }, []);
 
@@ -116,6 +198,8 @@ const updateCurrentChat = useCallback((chat) => {
         messages,
         isMessagesLoading,
         messagesError,
+        sendTextMessage,
+        onlineUsers,
       }}
     >
       {children}
