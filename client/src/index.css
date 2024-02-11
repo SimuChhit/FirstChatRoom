@@ -109,8 +109,8 @@ body {
   }
   
   .message.self {
-    color: white;
-    background: #00bd9b;
+    color: rgb(255, 255, 255);
+    background: #2d2b2ba4;
   }
   
   .message-footer {
