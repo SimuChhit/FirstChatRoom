@@ -10,11 +10,11 @@ export const ChatContextProvider = ({ children, user }) => {
   const [userChatError, setUserChatsError] = useState(null);
   const [potentialChats, setPotentialChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null)
-  const [messages, setMessages] = useState(null);
+  const [messages, setMessages] = useState([]);
   const [messagesError, setMessagesError] = useState(null);
   const [isMessagesLoading, setIsMessagesLoading] = useState(false)
   const [sendTextMessageError, setSendTextMessageError] = useState(null);
-  const [newMessage, setNewMessage] = useState(null);
+  const [newMessage, setNewMessage] = useState([]);
   const [socket, SetSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
 
@@ -56,8 +56,8 @@ useEffect(() => {
 useEffect(() => {
   if (socket === null) return;
 
-socket.on("getMessage", res => {
-  if (res.chatId === currentChat?._id) return
+  socket.on("getMessage", (res) => {
+    if ( currentChat?.id !== res.chatId?._id)  return
   setMessages((prev) => [...prev, res]);
 });
 
