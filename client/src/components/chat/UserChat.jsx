@@ -6,13 +6,13 @@ import { useContext } from "react";
 import { ChatContext } from "../../context/ChatContext";
 import { unreadNotificationsFunc } from '../../utils/unreadNotifications';
 import moment from "moment";
-import { useFecthLatestMessage } from "../../hooks/useFetchLatestMessage";
+import { useFetchLatestMessage } from "../../hooks/useFetchLatestMessage";
 
 
 const UserChats = ({ chat, user }) => {
     const { recipientUser } = useFetchRecipientUser(chat, user);
     const { onlineUsers, notifications, markThisUserNotificationsAsRead } = useContext(ChatContext);
-    const { latestMessage } = useFecthLatestMessage(chat);
+    const { latestMessage } = useFetchLatestMessage(chat);
     const unreadNotifications = unreadNotificationsFunc(notifications)
     const thisUserNotifications = unreadNotifications?.filter(
         n => n.senderId === recipientUser?._id
@@ -26,10 +26,11 @@ const UserChats = ({ chat, user }) => {
         let shortText = text.substring(0, 20);
 
         if (text.length > 20) {
-            shortText = shortText + "...";
+            shortText = shortText + "..."
 
-            return shortText;
+
         }
+        return shortText;
     }
 
     return (

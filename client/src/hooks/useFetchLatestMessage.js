@@ -3,7 +3,7 @@ import { ChatContext } from "../context/ChatContext";
 import { baseUrl, getRequest } from "../utils/services";
 
 
-export const useFecthLatestMessage = (chat) => {
+export const useFetchLatestMessage = (chat) => {
   const { newMessage, notifications } = useContext(ChatContext);
   const [latestMessage, setLatestMessage] = useState(null);
 
