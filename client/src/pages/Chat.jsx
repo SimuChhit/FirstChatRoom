@@ -5,6 +5,8 @@ import UserChats from "../components/chat/UserChat.jsx";
 import PotentialChats from "../components/chat/PotentialChats.jsx";
 import { AuthContext } from "../context/AuthContext.jsx";
 import Chatbox from "../components/chat/ChatBox.jsx";
+import "./pageStyles/chat.css";
+
 
 const Chat = () => {
     const { user } = useContext(AuthContext);

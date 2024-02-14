@@ -16,9 +16,10 @@
     text-decoration: none;
 }
 
-.Text-warning {
-    color: #ffffff; /* gelblich */
-    font-size: 11px;
+.Text-User-Name {
+    color: #f56ff3; /* gelblich */
+    font-size: 17px;
+    font-weight: bold;
 }
 .container{
     display: flex;
