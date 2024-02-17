@@ -14,7 +14,7 @@ const httpsServer = https.createServer(credentials);
 // Erstelle einen neuen Socket.IO-Server und binde ihn an den HTTPS-Server
 const io = new Server(httpsServer, {
     cors: {
-        origin: "https://localhost:5173", // Stelle sicher, dass du hier deine tatsächliche Client-URL angibst
+        origin: "*", // Stelle sicher, dass du hier deine tatsächliche Client-URL angibst
         methods: ["GET", "POST"],
         credentials: true
     }

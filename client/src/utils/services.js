@@ -1,4 +1,4 @@
-export const baseUrl = "https://localhost:3001/api"
+export const baseUrl = "https://192.168.1.113:3001/api"
 
 export const postRequest = async (url, body) => {
   const response = await fetch(url, {
