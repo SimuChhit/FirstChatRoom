@@ -4,8 +4,8 @@ const path = require('path');
 const { Server } = require("socket.io");
 
 // Lese SSL-Zertifikat und Schlüssel
-const privateKey = fs.readFileSync(path.join(__dirname, '..', 'server', 'server.key'), 'utf8');
-const certificate = fs.readFileSync(path.join(__dirname, '..', 'server', 'server.cert'), 'utf8');
+const privateKey = fs.readFileSync('/app/certs/server.key', 'utf8');
+const certificate = fs.readFileSync('/app/certs/server.cert', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
 // Erstelle einen HTTPS-Server (ohne Express, da dies nur für Socket.IO ist)

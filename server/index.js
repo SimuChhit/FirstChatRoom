@@ -17,8 +17,9 @@ const {MongoClient, ServerApiVersion} = require('mongodb');
 
 
 // Konstruktion der relativen Pfade mit `path.join`
-const privateKey = fs.readFileSync(path.join(__dirname, 'server.key'), 'utf8');
-const certificate = fs.readFileSync(path.join(__dirname, 'server.cert'), 'utf8');
+const privateKey = fs.readFileSync('/app/certs/server.key', 'utf8');
+const certificate = fs.readFileSync('/app/certs/server.cert', 'utf8');
+
 
 const credentials = { key: privateKey, cert: certificate };
 

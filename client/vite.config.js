@@ -9,8 +9,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Absolute Pfade zu deinem SSL-Zertifikat und Schlüssel
-const keyPath = path.join(__dirname, '../server/server.key');
-const certPath = path.join(__dirname, '../server/server.cert');
+const keyPath = path.join(__dirname, '../certs/server.key');
+const certPath = path.join(__dirname, '../certs/server.cert');
 
 export default defineConfig({
   plugins: [react()],
