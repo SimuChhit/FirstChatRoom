@@ -16,11 +16,21 @@ const messageRoute = require("./Routes/messageRoute");
 const {MongoClient, ServerApiVersion} = require('mongodb');
 
 
-// Konstruktion der relativen Pfade mit `path.join`
-const privateKey = fs.readFileSync('/app/certs/server.key', 'utf8');
-const certificate = fs.readFileSync('/app/certs/server.cert', 'utf8');
+let basePath;
+if (process.env.DOCKER_ENV) {
+  // Wenn in Docker ausgeführt, verwenden Sie den Docker-spezifischen Pfad
+  basePath = '/app/certs';
+} else {
+  // Lokaler Ausführungspfad
+  basePath = path.join(__dirname, '../certs');
+  // Überprüfen, ob der Pfad existiert
+  if (!fs.existsSync(path.join(basePath, 'server.key'))) {
+    basePath = path.join(__dirname, '../../certs');
+  }
+}
 
-
+const privateKey = fs.readFileSync(path.join(basePath, 'server.key'), 'utf8');
+const certificate = fs.readFileSync(path.join(basePath, 'server.cert'), 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
 // Initialisieren der Express-Anwendung

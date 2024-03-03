@@ -2,6 +2,8 @@ version: '3.8'
 services:
 
   server:
+    environment:
+      - DOCKER_ENV=1
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -12,6 +14,8 @@ services:
       - ./certs:/app/certs 
 
   socket:
+    environment:
+      - DOCKER_ENV=1
     build:
       context: ./socket
       dockerfile: Dockerfile
