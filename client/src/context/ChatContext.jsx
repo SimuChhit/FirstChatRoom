@@ -14,7 +14,7 @@ export const ChatContextProvider = ({ children, user }) => {
   const [messagesError, setMessagesError] = useState(null);
   const [isMessagesLoading, setIsMessagesLoading] = useState(false)
   const [sendTextMessageError, setSendTextMessageError] = useState(null);
-  const [newMessage, setNewMessage] = useState([]);
+  const [newMessage, setNewMessage] = useState(null);
   const [socket, SetSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [notifications, setNotifications] = useState([]);
@@ -23,7 +23,7 @@ export const ChatContextProvider = ({ children, user }) => {
   console.log("messages", messages);
 
   useEffect(() => {
-    const newSocket = io("https://192.168.1.113:3002");
+    const newSocket = io("https://192.168.0.111:3002");
     SetSocket(newSocket);
 
     return () => {
@@ -31,6 +31,7 @@ export const ChatContextProvider = ({ children, user }) => {
     }
   }, [user]);
 
+  //get online users
   useEffect(() => {
     if (socket === null) return;
     socket.emit("addNewUser", user?._id);
@@ -59,7 +60,7 @@ export const ChatContextProvider = ({ children, user }) => {
     if (socket === null) return;
 
     socket.on("getMessage", (res) => {
-      if (currentChat && res.chatId === currentChat._id)
+      if (currentChat?._id  !== res.chatId) return;
       setMessages((prev) => [...prev, res]);
     });
 

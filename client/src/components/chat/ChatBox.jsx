@@ -22,7 +22,7 @@ const Chatbox = () => {
 
   if (!recipientUser) return (
     <p style={{textAlign: "center", width: "100%"}}>
-      No converastion selected
+      No conversation selected
     </p>
   );
 
@@ -40,7 +40,7 @@ const Chatbox = () => {
       <Stack gap={3} className="messages">
         {messages && messages.map((message, index) =>
           <Stack key={index}
-                 className={`${message?.senderID === user?.id
+                 className={`${message?.senderId === user?._id
                    ? "message self align-self-end flex-grow-0"
                    : "message align-self-start flex-grow-0"}`}
                  ref={scroll}
@@ -56,7 +56,7 @@ const Chatbox = () => {
           value={textMessage}
           onChange={setTextMessage}
           fontFamily="Nunito Sans"
-          borderColor="rgba(72, 112, 223, 0.2)"
+          borderColor="rgba(72, 12, 2230, 0.2)"
 
         />
         <button className="send-btn"
